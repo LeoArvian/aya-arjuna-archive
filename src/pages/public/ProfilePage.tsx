@@ -76,7 +76,7 @@ export default function ProfilePage() {
     </div>
   );
 
-  const sprites = [profile.sprite_url, profile.sprite_url_2, profile.sprite_url_3].filter(Boolean) as string[];
+  const sprites = [profile.sprites?.[0], profile.sprites?.[1], profile.sprites?.[2]].filter(Boolean) as string[];
 
   return (
     <div className="min-h-screen bg-dark-bg pt-8 pb-20 overflow-x-hidden">

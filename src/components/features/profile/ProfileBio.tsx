@@ -41,16 +41,18 @@ export default function ProfileBio({ profile }: ProfileBioProps) {
         <InfoItem label={t('profile.language')} value={profile.languages?.join(", ")} />
         <InfoItem label={t('profile.family')} value={getLoc(profile.family)} />
         
-        {/* Hashtags */}
+        {/* Hashtags - VERSI BARU (Dinamis dari Array) */}
         <div className="col-span-1 md:col-span-2 space-y-2 mt-2">
-          <div className="flex gap-2 text-sm">
-            <span className="text-white/50 w-24">General</span>
-            <span className="text-primary font-medium">#{profile.hashtag_general}</span>
-          </div>
-          <div className="flex gap-2 text-sm">
-            <span className="text-white/50 w-24">Fanart</span>
-            <span className="text-blue-400 font-medium">#{profile.hashtag_art}</span>
-          </div>
+          {profile.hashtags && profile.hashtags.length > 0 ? (
+            profile.hashtags.map((tag, idx) => (
+              <div key={idx} className="flex gap-2 text-sm">
+                <span className="text-white/50 w-24 capitalize">{tag.label}</span>
+                <span className="text-primary font-medium">#{tag.value}</span>
+              </div>
+            ))
+          ) : (
+            <div className="text-white/30 text-sm italic">Belum ada hashtag</div>
+          )}
         </div>
 
         {/* Likes / Dislikes */}

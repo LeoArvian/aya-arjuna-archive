@@ -109,7 +109,11 @@ const AdminCard = ({
               )}
            </div>
         ) : (
-          !isMe && <Shield size={16} className="text-white/20" title={isTargetOwner ? "OWNER (Kebal Hukum)" : "Sesama Leader terlindungi"} />
+          !isMe && (
+            <span title={isTargetOwner ? "OWNER (Kebal Hukum)" : "Sesama Leader terlindungi"}>
+              <Shield size={16} className="text-white/20" />
+            </span>
+          )
         )}
       </div>
 
