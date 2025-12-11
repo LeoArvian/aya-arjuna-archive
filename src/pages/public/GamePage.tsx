@@ -47,7 +47,7 @@ const GAMES_DATABASE: GameConfig[] = [
     title: 'Kisah Cinta di Server',
     description: 'Visual Novel buatan fans tentang keseharian di Discord.',
     thumbnail: '/arjuna_px.png', 
-    path: '/fangames/novel-aya/index.html', // Sesuaikan path ini dengan folder public kamu
+    path: '/fangames/KandangAyam/index.html', // Sesuaikan path ini dengan folder public kamu
     color: 'from-pink-500/20 to-rose-900/20'
   },
 ];
