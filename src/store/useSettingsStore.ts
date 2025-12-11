@@ -22,13 +22,17 @@ interface SettingsState {
 export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
+      // LOCK KE 'id'. Jangan biarkan berubah.
       language: 'id', 
+      
+      // Walaupun dipanggil, paksa tetap 'id'
       setLanguage: (lang) => {
-        i18n.changeLanguage(lang);
-        set({ language: lang });
+        const lockedLang = 'id'; 
+        i18n.changeLanguage(lockedLang);
+        set({ language: lockedLang });
       },
 
-      // Default tema
+      // Theme tetap jalan normal
       theme: 'default',
       setTheme: (theme) => set({ theme }),
 
@@ -38,10 +42,9 @@ export const useSettingsStore = create<SettingsState>()(
     }),
     {
       name: 'aya-arjuna-settings',
+      // Saat website di-refresh, paksa balik ke ID
       onRehydrateStorage: () => (state) => {
-        if (state?.language) {
-          i18n.changeLanguage(state.language);
-        }
+        i18n.changeLanguage('id'); 
       }
     }
   )
