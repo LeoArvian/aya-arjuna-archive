@@ -1,0 +1,238 @@
+:root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Mencegah geser kanan-kiri */
+  position: relative;
+}
+
+/* Mencegah layout loncat saat scrollbar muncul/hilang */
+html {
+  scrollbar-gutter: stable;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Dancing+Script:wght@700&family=Fredoka:wght@600&family=Orbitron:wght@900&family=Outfit:wght@800&family=Playfair+Display:ital,wght@1,900&family=Press+Start+2P&family=Righteous&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* TEMA DEFAULT (Rose/Merah Gelap) */
+  :root {
+    --primary: 225 29 72;      /* #E11D48 (Rose-600) */
+    --primary-dark: 159 18 57; /* #9F1239 (Rose-800) */
+    --primary-light: 251 113 133; /* #FB7185 (Rose-400) */
+    
+    /* GANTI INI: Dari Biru (15 23 42) ke Hitam Netral (5 5 5) atau Merah Sangat Gelap (20 5 5) */
+    --bg-color: 10 10 10;      /* Hitam Netral (Agar tidak terlihat biru) */
+  }
+
+  /* TEMA AYA (Pink/Merah Terang) */
+  .theme-aya {
+    --primary: 236 72 153;     /* Pink-500 */
+    --primary-dark: 190 24 93; /* Pink-700 */
+    --primary-light: 249 168 212; /* Pink-300 */
+    --bg-color: 20 10 15;      /* Hitam Kemerahan */
+  }
+
+  /* TEMA ARJUNA (Biru/Cyan) */
+  .theme-arjuna {
+    --primary: 59 130 246;     /* Blue-500 */
+    --primary-dark: 29 78 216; /* Blue-700 */
+    --primary-light: 147 197 253; /* Blue-300 */
+    --bg-color: 10 15 30;      /* Hitam Kebiruan */
+  }
+
+  body {
+    background-color: rgb(var(--bg-color)); 
+    @apply text-white antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.5s ease;
+  }
+}
+
+/* --- Custom Font Classes (Mapping) --- */
+.font-modern { font-family: 'Outfit', sans-serif; }
+.font-classic { font-family: 'Playfair Display', serif; }
+.font-cyber { font-family: 'Orbitron', sans-serif; }
+.font-hand { font-family: 'Dancing Script', cursive; }
+.font-cute { font-family: 'Fredoka', sans-serif; }
+.font-pixel { font-family: 'Press Start 2P', cursive; }
+.font-comic { font-family: 'Bangers', cursive; }
+.font-bold-tech { font-family: 'Righteous', cursive; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f0f0f; 
+}
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E11D48; 
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); } /* Naik 6 pixel */
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* === CUSTOM ANIMATIONS === */
+
+/* 1. Equalizer Loader Animation */
+@keyframes equalizer {
+  0% { height: 20%; }
+  50% { height: 100%; }
+  100% { height: 20%; }
+}
+
+.animate-bar {
+  animation: equalizer 1s ease-in-out infinite;
+}
+
+/* Delay untuk setiap batang biar bergelombang */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* 2. Custom Input Style (Biar ga ngetik ulang) */
+@layer components {
+  .input-sm {
+    @apply w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary transition-colors placeholder:text-white/20;
+  }
+}
+
+/* Animasi Marquee (Running Text) */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Pause saat hover biar user bisa baca */
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Music Bar Animation (Equalizer Palsu untuk Minimized Player) */
+@keyframes musicBar {
+  0%, 100% { height: 10%; }
+  50% { height: 100%; }
+}
+
+.animate-music-bar {
+  animation: musicBar 0.8s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Kembang Api Meledak */
+@keyframes firework-explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0); /* Bergerak ke posisi akhir & mengecil */
+    opacity: 0;
+  }
+}
+
+.animate-firework-explode {
+  animation: firework-explode 1.5s ease-out infinite; /* Durasi 1.5s, diulang terus */
+}
+
+/* Pita Confetti Jatuh & Berputar */
+@keyframes confetti-fall {
+  0% {
+    top: -10%;
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    top: 110%; /* Jatuh sampai melewati bawah layar */
+    transform: rotate(calc(360deg * var(--rot-dir) * 2)); /* Berputar 2 kali lingkaran penuh */
+    opacity: 0;
+  }
+}
+
+.animate-confetti-fall {
+  animation-name: confetti-fall;
+  animation-duration: var(--fall-duration, 4s);
+  animation-delay: var(--fall-delay, 0s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Background Pulse Pelan */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Emoji Bounce Pelan */
+.animate-bounce-slow {
+  animation: bounce 3s infinite;
+}
+
+.input-sm {
+    @apply w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary transition-colors placeholder:text-white/20;
+}
+
+/* Update di src/index.css */
+
+@media (pointer: fine) {
+  /* Paksa hilangkan kursor di semua elemen termasuk select & option */
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+  
+  /* Khusus Select (Dropdown) agar area kliknya tetap terdeteksi TargetCursor */
+  select {
+    cursor: none !important;
+    appearance: none; /* Hilangkan style bawaan OS jika perlu */
+  }
+}
