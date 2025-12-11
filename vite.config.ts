@@ -10,6 +10,11 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['AJA.png', 'vite.svg'],
+
+      workbox: {
+        maximumFileSizeToCacheInBytes: 25 * 1024 * 1024, // Naikkan limit jadi 25MB
+      },
+      
       manifest: {
         name: 'Aya & Arjuna Fan Archive',
         short_name: 'AyaArjuna',
